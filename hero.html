@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hero Microsystems</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-hero: #080a0f;
+      --bg-viewport: #f8fafc;
+      --bg-card: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-light: #ffffff;
+      --brand-red: #e60028;
+      --brand-red-hover: #c90022;
+      --brand-green: #16a34a;
+      --border-light: #e2e8f0;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.05);
+      --radius-sm: 8px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background-color: var(--bg-hero);
+      color: var(--text-light);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* CONTENEDOR HERO CON GRID FIJO ESTABLE */
+    .hero-fixed-section {
+      position: relative;
+      min-height: 88vh;
+      padding: 90px 24px 60px;
+      display: flex;
+      align-items: center;
+      background: #080a0f;
+    }
+
+    .hero-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-text-col {
+      max-width: 560px;
+    }
+
+    .hero-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(2.3rem, 3.8vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.15;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, #ffffff 20%, #ff4d6d 70%, var(--brand-red) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.05rem, 1.35vw, 1.2rem);
+      color: #94a3b8;
+      line-height: 1.65;
+      margin-bottom: 34px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 34px;
+    }
+
+    .btn-quote {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 30px;
+      border-radius: var(--radius-sm);
+      background: var(--brand-red);
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      box-shadow: 0 8px 25px rgba(230, 0, 40, 0.35);
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-quote:hover {
+      background: var(--brand-red-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-examples {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 26px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.04);
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-examples:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.88rem;
+      color: #94a3b8;
+      flex-wrap: wrap;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .trust-item svg {
+      color: var(--brand-green);
+      width: 18px;
+      height: 18px;
+    }
+
+    /* COLUMNA DERECHA: MARCO FIJO ESTABLE - TEMA CLARO INTERNO */
+    .hero-screen-col {
+      width: 100%;
+    }
+
+    .stable-browser-frame {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--border-light);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .stable-browser-bar {
+      background: #f8fafc;
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'Inter', -apple-system, sans-serif;
+    }
+
+    .browser-dots {
+      display: flex;
+      gap: 7px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .dot-red { background: #ff5f56; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #22c55e; }
+
+    /* BARRA DE DIRECCIÓN SIN MONOSPACE */
+    .stable-address-pill {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 6px;
+      padding: 4px 14px;
+      font-size: 0.8rem;
+      color: #475569;
+      font-family: 'Inter', -apple-system, sans-serif;
+      max-width: 55%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .stable-title-label {
+      font-size: 0.82rem;
+      color: #475569;
+      font-weight: 600;
+    }
+
+    /* VIEWPORT CON ALTURA EXACTA FIJA: 420px, TEMA CLARO */
+    .stable-viewport {
+      background: var(--bg-viewport);
+      height: 420px;
+      min-height: 420px;
+      max-height: 420px;
+      position: relative;
+      overflow: hidden;
+      padding: 20px;
+      width: 100%;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, sans-serif;
+    }
+
+    .scene-view {
+      position: absolute;
+      inset: 20px;
+      height: calc(100% - 40px);
+      width: calc(100% - 40px);
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .scene-view.active {
+      display: block;
+      opacity: 1;
+    }
+
+    /* ELEMENTOS LEGO */
+    .lego-item {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.38s ease, transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .lego-item.assembled {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* WIREFRAME INICIAL */
+    .wireframe-mode .lego-item {
+      background: #f1f5f9 !important;
+      border-color: #e2e8f0 !important;
+    }
+
+    .wireframe-mode * {
+      color: transparent !important;
+      border-color: transparent !important;
+    }
+
+    /* CURSOR VIRTUAL Y CLIC */
+    .virtual-cursor {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      pointer-events: none;
+      z-index: 60;
+      opacity: 0;
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
+    }
+
+    .cursor-ripple {
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(230, 0, 40, 0.4);
+      transform: scale(0);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .cursor-ripple.active {
+      animation: rippleAnim 0.6s ease-out forwards;
+    }
+
+    @keyframes rippleAnim {
+      0% { transform: scale(0.2); opacity: 0.9; }
+      100% { transform: scale(1.6); opacity: 0; }
+    }
+
+    @keyframes slideInRow {
+      0% { opacity: 0; transform: translateY(-8px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInToast {
+      0% { opacity: 0; transform: scale(0.95); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* CUADRÍCULA DE 4 TARJETAS ERP RESPONSIVE */
+    .erp-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    /* PESTAÑAS MANUALES */
+    .scene-tabs-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .scene-tab-btn {
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .scene-tab-btn.active {
+      background: #ffffff;
+      border-color: #ffffff;
+      color: #0f172a;
+    }
+
+    .scene-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #64748b;
+    }
+
+    .scene-tab-btn.active .scene-dot {
+      background: var(--brand-red);
+    }
+
+    @media (max-width: 968px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        text-align: center;
+      }
+      .hero-text-col { max-width: 100%; }
+      .hero-actions { justify-content: center; }
+      .hero-trust { justify-content: center; }
+      .stable-viewport { height: 390px; min-height: 390px; max-height: 390px; }
+    }
+
+    @media (max-width: 640px) {
+      .erp-cards-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      .lego-item {
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+      }
+      .virtual-cursor, .cursor-ripple {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero-fixed-section">
+    <div class="hero-container">
+
+      <!-- COLUMNA IZQUIERDA -->
+      <div class="hero-text-col">
+        <h1 class="hero-title">
+          Tu negocio merece una web o sistema que <span>trabaje por ti</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Creamos sistemas de gestión, portales de noticias y páginas web a tu medida.
+          Fáciles de usar, rápidos y pensados para ordenar y hacer crecer tu empresa.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#contact" class="btn-quote">
+            <span>Cotiza tu proyecto</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+
+          <a href="#portfolio" class="btn-examples">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e60028" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            <span>Ver ejemplos</span>
+          </a>
+        </div>
+
+        <div class="hero-trust">
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Fácil de usar para tu equipo</span>
+          </div>
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Soporte directo por WhatsApp</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUMNA DERECHA -->
+      <div class="hero-screen-col">
+        <div class="stable-browser-frame">
+
+          <!-- Barra superior (sin monospace) -->
+          <div class="stable-browser-bar">
+            <div class="browser-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+
+            <div class="stable-address-pill">
+              <span id="browserUrl">🔒 microsystems.bo/sistema-erp</span>
+            </div>
+
+            <div class="stable-title-label" id="browserTitle">
+              Sistema de gestión (ERP)
+            </div>
+          </div>
+
+          <!-- Viewport Fijo Estable (Tema Claro) -->
+          <div class="stable-viewport" id="viewport">
+
+            <!-- Cursor virtual -->
+            <div class="virtual-cursor" id="virtualCursor">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#0f172a" stroke="#ffffff" stroke-width="1.5">
+                <path d="M3 3l7 18 3-7 7-3L3 3z"></path>
+              </svg>
+              <div class="cursor-ripple" id="cursorRipple"></div>
+            </div>
+
+            <!-- ==============================================
+                 ESCENA 1: SISTEMA DE GESTIÓN (ERP)
+                 ============================================== -->
+            <div class="scene-view active" id="scene1">
+              <div style="display: grid; grid-template-columns: 68px 1fr; gap: 12px; height: 100%;">
+                <!-- Barra lateral con SVG -->
+                <div class="lego-item" id="s1_sidebar" style="background: #ffffff; border: 1px solid var(--border-light); border-radius: 10px; padding: 12px 6px; display: flex; flex-direction: column; align-items: center; gap: 14px; box-shadow: var(--shadow-sm);">
+                  <div style="width: 38px; height: 38px; border-radius: 8px; background: var(--brand-red); display: flex; align-items: center; justify-content: center; color: #ffffff;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                  </div>
+                  <div style="width: 38px; height: 38px; border-radius: 8px; background: #f8fafc; display: flex; align-items: center; justify-content: center; color: #64748b;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                  </div>
+                  <div style="width: 38px; height: 38px; border-radius: 8px; background: #f8fafc; display: flex; align-items: center; justify-content: center; color: #64748b;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                  </div>
+                </div>
+
+                <!-- Contenido -->
+                <div style="display: flex; flex-direction: column; gap: 12px; height: 100%;">
+                  <!-- 4 Tarjetas Responsive -->
+                  <div class="erp-cards-grid">
+                    <div class="lego-item" id="s1_card1" style="background: #ffffff; border: 1px solid var(--border-light); border-radius: 10px; padding: 10px 12px; box-shadow: var(--shadow-sm);">
+                      <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">Ventas del Mes</div>
+                      <div style="font-family: 'Poppins', sans-serif; font-size: 1.15rem; font-weight: 700; color: #0f172a; margin-top: 2px;">Bs. 54,200</div>
+                      <div style="font-size: 0.8rem; color: var(--brand-green); font-weight: 600;">+18% este mes</div>
+                    </div>
+                    <div class="lego-item" id="s1_card2" style="background: #ffffff; border: 1px solid var(--border-light); border-radius: 10px; padding: 10px 12px; box-shadow: var(--shadow-sm);">
+                      <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">Inventario</div>
+                      <div style="font-family: 'Poppins', sans-serif; font-size: 1.15rem; font-weight: 700; color: #0f172a; margin-top: 2px;">1,420 unid.</div>
+                      <div style="font-size: 0.8rem; color: #64748b; font-weight: 600;">Stock al día</div>
+                    </div>
+                    <div class="lego-item" id="s1_card3" style="background: #ffffff; border: 1px solid var(--border-light); border-radius: 10px; padding: 10px 12px; box-shadow: var(--shadow-sm);">
+                      <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">Facturas</div>
+                      <div style="font-family: 'Poppins', sans-serif; font-size: 1.15rem; font-weight: 700; color: #0f172a; margin-top: 2px;">48 emitidas</div>
+                      <div style="font-size: 0.8rem; color: var(--brand-green); font-weight: 600;">0 pendientes</div>
+                    </div>
+                    <div class="lego-item" id="s1_card4" style="background: #ffffff; border: 1px solid var(--border-light); border-radius: 10px; padding: 10px 12px; box-shadow: var(--shadow-sm);">
+                      <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">Clientes</div>
+                      <div style="font-family: 'Poppins', sans-serif; font-size: 1.15rem; font-weight: 700; color: #0f172a; margin-top: 2px;">324 activos</div>
+                      <div style="font-size: 0.8rem; color: #64748b; font-weight: 600;">Al día</div>
+                    </div>
+                  </div>
+
+                  <!-- Gráfica y Tabla -->
+                  <div style="display: grid; grid-template-columns: 1fr 1.15fr; gap: 12px; flex: 1;">
+                    <div class="lego-item" id="s1_chart" style="background: #ffffff; border: 1px solid var(--border-light); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm);">
+                      <div style="display: flex; justify-content: space-between; font-size: 0.84rem; font-weight: 700; color: #0f172a;">
+                        <span>Ventas Semanales</span>
+                        <span style="color: var(--brand-green);">+24%</span>
+                      </div>
+                      <div style="display: flex; align-items: flex-end; justify-content: space-around; height: 100px; padding-top: 6px;">
+                        <div style="display: flex; flexDirection: column; align-items: center; gap: 4px; width: 24px;"><div id="bar1" style="width: 100%; height: 10%; background: #cbd5e1; border-radius: 4px 4px 0 0; transition: height 0.6s;"></div><span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">Lun</span></div>
+                        <div style="display: flex; flexDirection: column; align-items: center; gap: 4px; width: 24px;"><div id="bar2" style="width: 100%; height: 10%; background: #cbd5e1; border-radius: 4px 4px 0 0; transition: height 0.6s;"></div><span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">Mar</span></div>
+                        <div style="display: flex; flexDirection: column; align-items: center; gap: 4px; width: 24px;"><div id="bar3" style="width: 100%; height: 10%; background: #cbd5e1; border-radius: 4px 4px 0 0; transition: height 0.6s;"></div><span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">Mié</span></div>
+                        <div style="display: flex; flexDirection: column; align-items: center; gap: 4px; width: 24px;"><div id="bar4" style="width: 100%; height: 10%; background: #cbd5e1; border-radius: 4px 4px 0 0; transition: height 0.6s;"></div><span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">Jue</span></div>
+                        <div style="display: flex; flexDirection: column; align-items: center; gap: 4px; width: 24px;"><div id="bar5" style="width: 100%; height: 10%; background: var(--brand-red); border-radius: 4px 4px 0 0; transition: height 0.6s;"></div><span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">Vie</span></div>
+                      </div>
+                    </div>
+
+                    <div class="lego-item" id="s1_table" style="background: #ffffff; border: 1px solid var(--border-light); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm);">
+                      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <span style="font-size: 0.84rem; font-weight: 700; color: #0f172a;">Clientes &amp; Cobros</span>
+                        <button id="s1_btn" style="padding: 5px 12px; background: var(--brand-red); color: #ffffff; border: none; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer;">
+                          + Nueva Venta
+                        </button>
+                      </div>
+
+                      <div style="display: flex; flex-direction: column; gap: 6px;">
+                        <!-- Fila nueva que aparece tras el clic -->
+                        <div id="erpNewRow" style="display: none; justify-content: space-between; align-items: center; padding: 7px 8px; border-radius: 6px; background: #f0fdf4; border: 1px solid #bbf7d0; font-size: 0.82rem; animation: slideInRow 0.35s ease-out;">
+                          <span style="color: #0f172a; font-weight: 600;">Distribuidora El Fuerte</span>
+                          <span style="color: #0f172a; font-weight: 700;">Bs. 9,800</span>
+                          <span style="padding: 2px 8px; border-radius: 4px; background: #dcfce7; color: var(--brand-green); font-size: 0.8rem; font-weight: 700;">✓ Guardado</span>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #f1f5f9; font-size: 0.82rem;">
+                          <span style="color: #334155; font-weight: 500;">Comercial El Sol</span>
+                          <span style="color: #0f172a; font-weight: 700;">Bs. 8,400</span>
+                          <span style="padding: 2px 8px; border-radius: 4px; background: #dcfce7; color: var(--brand-green); font-size: 0.8rem; font-weight: 700;">Pagado</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 6px 0; font-size: 0.82rem;">
+                          <span style="color: #334155; font-weight: 500;">Importadora Oriente</span>
+                          <span style="color: #0f172a; font-weight: 700;">Bs. 12,300</span>
+                          <span style="padding: 2px 8px; border-radius: 4px; background: #dcfce7; color: var(--brand-green); font-size: 0.8rem; font-weight: 700;">Pagado</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ==============================================
+                 ESCENA 2: PORTAL DE NOTICIAS
+                 ============================================== -->
+            <div class="scene-view" id="scene2">
+              <div style="display: flex; flex-direction: column; gap: 12px; height: 100%;">
+                <div class="lego-item" id="s2_header" style="background: #ffffff; border: 1px solid var(--border-light); border-radius: 10px; padding: 10px 18px; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow-sm);">
+                  <div style="display: flex; align-items: center; gap: 8px; font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1.05rem; color: var(--brand-red);">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"></path></svg>
+                    <span>DIARIO DIGITAL</span>
+                  </div>
+                  <div style="display: flex; gap: 16px; font-size: 0.84rem; color: #64748b; font-weight: 500;">
+                    <span style="color: #0f172a; font-weight: 700;">Portada</span>
+                    <span>Economía</span>
+                    <span>Santa Cruz</span>
+                  </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1.35fr 1fr; gap: 12px; flex: 1;">
+                  <div class="lego-item" id="s2_hero" style="background: #ffffff; border: 1px solid var(--border-light); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-sm);">
+                    <div style="height: 120px; background: #fee2e2; position: relative;">
+                      <svg width="100%" height="100%" viewBox="0 0 300 120" preserveAspectRatio="none">
+                        <rect width="300" height="120" fill="#fee2e2"/>
+                        <circle cx="230" cy="40" r="28" fill="#fecdd3"/>
+                        <path d="M0,120 L70,80 L150,105 L230,65 L300,95 L300,120 Z" fill="#fda4af" opacity="0.6"/>
+                      </svg>
+                    </div>
+                    <div style="padding: 14px; display: flex; flex-direction: column; justify-content: space-between; flex: 1;">
+                      <span style="font-size: 0.8rem; font-weight: 700; color: var(--brand-red);">REPORTE EXCLUSIVO</span>
+                      <h4 style="font-family: 'Poppins', sans-serif; font-size: 0.98rem; font-weight: 700; color: #0f172a; line-height: 1.35; margin: 4px 0;">
+                        Santa Cruz lidera el crecimiento comercial del país este trimestre
+                      </h4>
+                      <p style="font-size: 0.82rem; color: #475569; line-height: 1.4;">
+                        Empresas locales reportan aumento en transacciones y modernización digital.
+                      </p>
+                      <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+                        <button id="s2_btn" style="padding: 6px 14px; border-radius: 6px; background: var(--brand-red); color: #ffffff; font-size: 0.8rem; font-weight: 600; border: none; cursor: pointer;">
+                          Leer Noticia
+                        </button>
+                        <span id="newsAlert" style="display: none; font-size: 0.8rem; color: var(--brand-red); font-weight: 700; animation: fadeInToast 0.3s ease-out;">
+                          ✓ Noticia publicada
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div class="lego-item" id="s2_side1" style="background: #ffffff; border: 1px solid var(--border-light); border-radius: 10px; padding: 12px; display: flex; gap: 12px; align-items: center; box-shadow: var(--shadow-sm);">
+                      <div style="width: 48px; height: 48px; border-radius: 6px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; color: #94a3b8; flex-shrink: 0;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"></path></svg>
+                      </div>
+                      <div>
+                        <h5 style="font-size: 0.85rem; font-weight: 600; color: #0f172a; line-height: 1.3;">Nuevas inversiones impulsan la producción local</h5>
+                        <span style="font-size: 0.8rem; color: #64748b;">Hace 20 min</span>
+                      </div>
+                    </div>
+                    <div class="lego-item" id="s2_side2" style="background: #ffffff; border: 1px solid var(--border-light); border-radius: 10px; padding: 12px; display: flex; gap: 12px; align-items: center; box-shadow: var(--shadow-sm);">
+                      <div style="width: 48px; height: 48px; border-radius: 6px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; color: #94a3b8; flex-shrink: 0;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"></path></svg>
+                      </div>
+                      <div>
+                        <h5 style="font-size: 0.85rem; font-weight: 600; color: #0f172a; line-height: 1.3;">Señal de radio y TV digital transmiten 24/7 sin caídas</h5>
+                        <span style="font-size: 0.8rem; color: #64748b;">Hace 1 hora</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ==============================================
+                 ESCENA 3: WEB INFORMATIVA
+                 ============================================== -->
+            <div class="scene-view" id="scene3">
+              <div style="display: flex; flex-direction: column; gap: 14px; height: 100%;">
+                <div class="lego-item" id="s3_nav" style="background: #ffffff; border: 1px solid var(--border-light); border-radius: 10px; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow-sm);">
+                  <div style="font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1.05rem; color: #0f172a;">MI EMPRESA</div>
+                  <div style="display: flex; gap: 18px; font-size: 0.84rem; color: #64748b;">
+                    <span>Inicio</span>
+                    <span>Servicios</span>
+                    <span>Contacto</span>
+                  </div>
+                </div>
+
+                <!-- Banner dividido en dos: Texto a la izquierda, Ilustración vectorial a la derecha -->
+                <div class="lego-item" id="s3_banner" style="background: #ffffff; border: 1px solid var(--border-light); border-radius: 12px; padding: 22px 20px; display: grid; grid-template-columns: 1.3fr 1fr; align-items: center; gap: 20px; box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);">
+                  <div>
+                    <h4 style="font-family: 'Poppins', sans-serif; font-size: 1.22rem; font-weight: 800; color: #0f172a; line-height: 1.25; margin-bottom: 6px;">
+                      Soluciones digitales que impulsan tu negocio
+                    </h4>
+                    <p style="font-size: 0.84rem; color: #475569; line-height: 1.45; margin-bottom: 14px;">
+                      Te ayudamos a ordenar tus ventas, captar clientes y destacar con una plataforma moderna.
+                    </p>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                      <button id="s3_btn" style="padding: 9px 24px; background: var(--brand-red); color: #ffffff; border-radius: 6px; font-family: 'Poppins', sans-serif; font-size: 0.84rem; font-weight: 600; border: none; cursor: pointer; box-shadow: 0 4px 14px rgba(230, 0, 40, 0.25);">
+                        Contáctanos
+                      </button>
+                      <div id="webSentAlert" style="display: none; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 6px; background: #fee2e2; color: var(--brand-red); font-size: 0.82rem; font-weight: 700; animation: fadeInToast 0.3s ease-out;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span>¡Mensaje enviado!</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Ilustración vectorial moderna -->
+                  <div style="display: flex; justify-content: center; align-items: center; height: 135px;">
+                    <svg width="100%" height="135" viewBox="0 0 200 135" fill="none">
+                      <circle cx="150" cy="50" r="42" fill="#fee2e2" />
+                      <rect x="20" y="80" width="160" height="40" rx="10" fill="#f1f5f9" />
+                      <rect x="55" y="32" width="90" height="58" rx="6" fill="#0f172a" />
+                      <rect x="60" y="36" width="80" height="50" rx="3" fill="#ffffff" />
+                      <path d="M68 74 L84 60 L100 66 L116 48 L132 54" stroke="#e60028" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                      <circle cx="116" cy="48" r="3" fill="#e60028" />
+                      <path d="M42 92 L158 92 L150 98 L50 98 Z" fill="#334155" />
+                      <rect x="120" y="20" width="60" height="26" rx="6" fill="#ffffff" stroke="#e2e8f0" stroke-width="1" />
+                      <circle cx="132" cy="33" r="6" fill="#fee2e2" />
+                      <path d="M130 33 L132 35 L135 31" stroke="#e60028" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      <rect x="142" y="30" width="30" height="5" rx="2" fill="#e60028" />
+                      <rect x="35" y="76" width="12" height="15" rx="3" fill="#e60028" opacity="0.85" />
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- Testimonio con avatar iniciales CM en rojo suave (espacioso) -->
+                <div class="lego-item" id="s3_testi" style="background: #ffffff; border: 1px solid var(--border-light); border-radius: 10px; padding: 14px 20px; display: flex; align-items: center; gap: 16px; box-shadow: var(--shadow-sm);">
+                  <div style="width: 42px; height: 42px; border-radius: 50%; background: #fee2e2; color: var(--brand-red); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; flex-shrink: 0;">CM</div>
+                  <div>
+                    <div style="font-size: 0.85rem; font-weight: 700; color: #0f172a; margin-bottom: 2px;">"Aumentamos nuestras ventas un 40% este año"</div>
+                    <div style="font-size: 0.8rem; color: #64748b;">— Lic. Carlos Medina, Gerente Comercial</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Pestañas de control manual -->
+        <div class="scene-tabs-bar">
+          <button class="scene-tab-btn active" id="tab1" onclick="jumpToScene(0)">
+            <span class="scene-dot" style="background: var(--brand-red);"></span>
+            <span>1. Sistema de gestión (ERP)</span>
+          </button>
+          <button class="scene-tab-btn" id="tab2" onclick="jumpToScene(1)">
+            <span class="scene-dot"></span>
+            <span>2. Portal de noticias</span>
+          </button>
+          <button class="scene-tab-btn" id="tab3" onclick="jumpToScene(2)">
+            <span class="scene-dot"></span>
+            <span>3. Web informativa</span>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    const sceneConfigs = [
+      {
+        id: 'scene1',
+        title: 'Sistema de gestión (ERP)',
+        url: 'microsystems.bo/sistema-erp',
+        btnId: 's1_btn',
+        blocks: ['s1_sidebar', 's1_card1', 's1_card2', 's1_card3', 's1_card4', 's1_chart', 's1_table']
+      },
+      {
+        id: 'scene2',
+        title: 'Portal de noticias',
+        url: 'microsystems.bo/noticias-digital',
+        btnId: 's2_btn',
+        blocks: ['s2_header', 's2_hero', 's2_side1', 's2_side2']
+      },
+      {
+        id: 'scene3',
+        title: 'Web informativa',
+        url: 'microsystems.bo/tu-empresa',
+        btnId: 's3_btn',
+        blocks: ['s3_nav', 's3_banner', 's3_testi']
+      }
+    ];
+
+    let currentSceneIdx = 0;
+    let activeTimers = [];
+
+    const urlEl = document.getElementById('browserUrl');
+    const titleEl = document.getElementById('browserTitle');
+    const cursorEl = document.getElementById('virtualCursor');
+    const rippleEl = document.getElementById('cursorRipple');
+    const viewportEl = document.getElementById('viewport');
+
+    function addTimer(fn, delay) {
+      const id = setTimeout(fn, delay);
+      activeTimers.push(id);
+      return id;
+    }
+
+    function clearAllTimers() {
+      activeTimers.forEach(clearTimeout);
+      activeTimers = [];
+    }
+
+    function runScene(index) {
+      clearAllTimers();
+      currentSceneIdx = index;
+      const config = sceneConfigs[index];
+
+      urlEl.textContent = '🔒 ' + config.url;
+      titleEl.textContent = config.title;
+
+      for (let i = 0; i < 3; i++) {
+        const tab = document.getElementById('tab' + (i + 1));
+        const dot = tab.querySelector('.scene-dot');
+        if (i === index) {
+          tab.classList.add('active');
+          dot.style.background = 'var(--brand-red)';
+        } else {
+          tab.classList.remove('active');
+          dot.style.background = '#64748b';
+        }
+      }
+
+      // Reset de reacciones visibles
+      const erpNewRow = document.getElementById('erpNewRow');
+      if (erpNewRow) erpNewRow.style.display = 'none';
+
+      const newsAlert = document.getElementById('newsAlert');
+      if (newsAlert) newsAlert.style.display = 'none';
+
+      const webSentAlert = document.getElementById('webSentAlert');
+      if (webSentAlert) webSentAlert.style.display = 'none';
+
+      sceneConfigs.forEach((sc) => {
+        const sceneEl = document.getElementById(sc.id);
+        sceneEl.classList.remove('active');
+        sceneEl.classList.add('wireframe-mode');
+
+        sc.blocks.forEach(bId => {
+          const b = document.getElementById(bId);
+          if (b) b.classList.remove('assembled');
+        });
+      });
+
+      cursorEl.style.opacity = '0';
+      cursorEl.style.transform = 'translate(80px, 350px)';
+      rippleEl.classList.remove('active');
+
+      if (index === 0) {
+        for (let b = 1; b <= 5; b++) {
+          const bar = document.getElementById('bar' + b);
+          if (bar) bar.style.height = '10%';
+        }
+      }
+
+      const activeSceneEl = document.getElementById(config.id);
+      activeSceneEl.classList.add('active');
+
+      // Ensamblaje bloques Lego
+      config.blocks.forEach((blockId, i) => {
+        addTimer(() => {
+          const block = document.getElementById(blockId);
+          if (block) block.classList.add('assembled');
+        }, i * 150 + 100);
+      });
+
+      // Colorización y contenido
+      const colorizeDelay = config.blocks.length * 150 + 200;
+      addTimer(() => {
+        activeSceneEl.classList.remove('wireframe-mode');
+
+        if (index === 0) {
+          const heights = ['45%', '65%', '55%', '80%', '95%'];
+          for (let b = 1; b <= 5; b++) {
+            const bar = document.getElementById('bar' + b);
+            if (bar) bar.style.height = heights[b - 1];
+          }
+        }
+      }, colorizeDelay);
+
+      // Cursor y clic sobre botón objetivo
+      const cursorDelay = colorizeDelay + 500;
+      addTimer(() => {
+        const targetBtn = document.getElementById(config.btnId);
+        if (!targetBtn) return;
+
+        const viewportRect = viewportEl.getBoundingClientRect();
+        const btnRect = targetBtn.getBoundingClientRect();
+
+        const targetX = btnRect.left - viewportRect.left + (btnRect.width / 2);
+        const targetY = btnRect.top - viewportRect.top + (btnRect.height / 2);
+
+        cursorEl.style.opacity = '1';
+        cursorEl.style.transform = `translate(${targetX}px, ${targetY}px)`;
+
+        addTimer(() => {
+          rippleEl.classList.add('active');
+          targetBtn.style.transform = 'scale(0.93)';
+
+          addTimer(() => {
+            targetBtn.style.transform = 'scale(1)';
+          }, 150);
+
+          // REACCIÓN VISIBLE TRAS EL CLIC
+          if (index === 0 && erpNewRow) {
+            erpNewRow.style.display = 'flex';
+          } else if (index === 1 && newsAlert) {
+            newsAlert.style.display = 'inline';
+          } else if (index === 2 && webSentAlert) {
+            webSentAlert.style.display = 'inline-flex';
+          }
+        }, 450);
+      }, cursorDelay);
+
+      // Pausa de 2.5s y bucle continuo
+      const nextSceneDelay = cursorDelay + 2700;
+      addTimer(() => {
+        const nextIdx = (index + 1) % sceneConfigs.length;
+        runScene(nextIdx);
+      }, nextSceneDelay);
+    }
+
+    // Clic manual: reinicia sin romper el bucle
+    function jumpToScene(index) {
+      clearAllTimers();
+      runScene(index);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      runScene(0);
+    });
+  </script>
+</body>
+</html>
