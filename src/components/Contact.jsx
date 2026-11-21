@@ -1,38 +1,23 @@
 import React, { useState } from 'react';
-import { MessageSquare, Mail, MapPin, Phone, ArrowRight, Shield } from 'lucide-react';
+import { MessageSquare, Mail, MapPin, Phone, ArrowRight } from 'lucide-react';
 
-const projectTypes = [
+const projectOptions = [
+  'Plan A: Esencial',
+  'Plan B: Gestión Empresarial',
+  'Plan C: Gestión Integral',
   'App Móvil (Android / iOS)',
-  'Desarrollo Web de Alto Rendimiento',
-  'Sistema ERP / CRM a Medida',
-  'Portal de Noticias & Medios',
-  'Servidores & Soporte Corporativo'
-];
-
-const scales = [
-  'Uso interno de empresa (10 - 100 usuarios)',
-  'Mediana escala (1,000 - 10,000 usuarios)',
-  'Alto tráfico masivo (+50,000 visitas/día)'
-];
-
-const timelines = [
-  'Prioridad Alta (2 a 4 semanas)',
-  'Plazo Normal (1 a 2 meses)',
-  'Proyecto por Fases Continuas'
+  'Sistema Web o Plataforma a Medida',
+  'Servidores & Soporte Técnico'
 ];
 
 export default function Contact() {
-  const [selectedType, setSelectedType] = useState(projectTypes[0]);
-  const [selectedScale, setSelectedScale] = useState(scales[0]);
-  const [selectedTimeline, setSelectedTimeline] = useState(timelines[1]);
-  const [notes, setNotes] = useState('');
+  const [selectedProject, setSelectedProject] = useState(projectOptions[0]);
+  const [details, setDetails] = useState('');
 
-  const createWhatsAppUrl = (phone = '59160851148') => {
-    const text = `Hola Erick, te escribo desde la web de Microsystems para cotizar un desarrollo:
-• Tipo de Proyecto: ${selectedType}
-• Escala de uso: ${selectedScale}
-• Tiempo estimado: ${selectedTimeline}
-${notes ? `• Detalle: ${notes}` : ''}
+  const buildWhatsAppUrl = (phone = '59160851148') => {
+    const text = `Hola Ishmael, te escribo desde la web de Microsystems para cotizar un proyecto:
+• Requerimiento: ${selectedProject}
+${details.trim() ? `• Detalle: ${details.trim()}` : ''}
 
 ¿Podemos coordinar para revisar la propuesta?`;
 
@@ -40,17 +25,19 @@ ${notes ? `• Detalle: ${notes}` : ''}
   };
 
   return (
-    <section id="contact" className="section" style={{ background: '#080a0f' }}>
+    <section id="contact" className="section" style={{ background: '#080a0f', position: 'relative' }}>
       <div className="container">
-        {/* Section Header */}
-        <div style={{ maxWidth: '780px', marginBottom: '50px' }}>
+        {/* Encabezado limpio y directo */}
+        <div style={{ maxWidth: '780px', marginBottom: '46px' }}>
           <h2
             style={{
               fontFamily: 'var(--font-display)',
               fontSize: 'clamp(2rem, 3.5vw, 3rem)',
               fontWeight: 800,
               lineHeight: 1.15,
-              marginBottom: '16px',
+              color: '#ffffff',
+              letterSpacing: '-0.02em',
+              marginBottom: '14px',
             }}
           >
             Hablemos de tu Próximo{' '}
@@ -59,241 +46,305 @@ ${notes ? `• Detalle: ${notes}` : ''}
 
           <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', lineHeight: 1.6 }}>
             En Microsystems estamos listos para construir la solución digital que tu empresa necesita.
-            Define tus requerimientos básicos para iniciar una conversación directa por WhatsApp.
+            Cuéntanos tu requerimiento o contáctanos de forma directa para coordinar una reunión.
           </p>
         </div>
 
-        {/* Contact Layout */}
+        {/* Layout simple y plano, sin saturación 3D */}
         <div
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '30px',
+            gap: '32px',
             alignItems: 'start',
           }}
         >
-          {/* Left: Quick Project Configurator */}
+          {/* Columna Izquierda: Formulario directo y ágil */}
           <div
-            className="app-window"
-            style={{ padding: '32px', background: '#0e131d' }}
+            style={{
+              background: '#0d121c',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              borderRadius: '14px',
+              padding: '32px 28px',
+            }}
           >
-            <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.3rem', fontWeight: 700, color: '#ffffff', marginBottom: '20px' }}>
-              Configurar Requerimientos del Proyecto
+            <h3
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: '1.3rem',
+                fontWeight: 700,
+                color: '#ffffff',
+                marginBottom: '20px',
+              }}
+            >
+              Envía tu requerimiento por WhatsApp
             </h3>
 
-            {/* Type */}
-            <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', fontSize: '0.84rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '8px' }}>
-                1. ¿Qué tipo de software necesitas?
+            {/* Selector de solución */}
+            <div style={{ marginBottom: '22px' }}>
+              <label
+                style={{
+                  display: 'block',
+                  fontSize: '0.86rem',
+                  fontWeight: 600,
+                  color: '#cbd5e1',
+                  marginBottom: '10px',
+                }}
+              >
+                1. ¿Qué solución necesitas para tu negocio?
               </label>
+
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                {projectTypes.map((t) => (
-                  <button
-                    key={t}
-                    type="button"
-                    onClick={() => setSelectedType(t)}
-                    style={{
-                      padding: '8px 14px',
-                      borderRadius: '6px',
-                      fontSize: '0.84rem',
-                      fontWeight: 600,
-                      background: selectedType === t ? 'var(--brand-red)' : 'rgba(255, 255, 255, 0.04)',
-                      border: `1px solid ${selectedType === t ? 'var(--brand-red)' : 'rgba(255, 255, 255, 0.1)'}`,
-                      color: '#ffffff',
-                      cursor: 'pointer',
-                      transition: 'all 0.15s',
-                    }}
-                  >
-                    {t}
-                  </button>
-                ))}
+                {projectOptions.map((opt) => {
+                  const isSelected = selectedProject === opt;
+                  return (
+                    <button
+                      key={opt}
+                      type="button"
+                      onClick={() => setSelectedProject(opt)}
+                      style={{
+                        padding: '9px 15px',
+                        borderRadius: '8px',
+                        fontSize: '0.84rem',
+                        fontWeight: 600,
+                        background: isSelected ? 'var(--brand-red)' : 'rgba(255, 255, 255, 0.04)',
+                        border: isSelected ? '1px solid var(--brand-red)' : '1px solid rgba(255, 255, 255, 0.1)',
+                        color: '#ffffff',
+                        cursor: 'pointer',
+                        transition: 'all 0.15s ease',
+                      }}
+                    >
+                      {opt}
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
-            {/* Scale */}
-            <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', fontSize: '0.84rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '8px' }}>
-                2. Escala esperada de usuarios / tráfico:
-              </label>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                {scales.map((s) => (
-                  <button
-                    key={s}
-                    type="button"
-                    onClick={() => setSelectedScale(s)}
-                    style={{
-                      padding: '8px 14px',
-                      borderRadius: '6px',
-                      fontSize: '0.84rem',
-                      fontWeight: 600,
-                      background: selectedScale === s ? 'rgba(0, 210, 255, 0.2)' : 'rgba(255, 255, 255, 0.04)',
-                      border: `1px solid ${selectedScale === s ? '#00d2ff' : 'rgba(255, 255, 255, 0.1)'}`,
-                      color: '#ffffff',
-                      cursor: 'pointer',
-                      transition: 'all 0.15s',
-                    }}
-                  >
-                    {s}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Timeline */}
-            <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', fontSize: '0.84rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '8px' }}>
-                3. Plazo aproximado:
-              </label>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                {timelines.map((tl) => (
-                  <button
-                    key={tl}
-                    type="button"
-                    onClick={() => setSelectedTimeline(tl)}
-                    style={{
-                      padding: '8px 14px',
-                      borderRadius: '6px',
-                      fontSize: '0.84rem',
-                      fontWeight: 600,
-                      background: selectedTimeline === tl ? 'rgba(39, 201, 63, 0.2)' : 'rgba(255, 255, 255, 0.04)',
-                      border: `1px solid ${selectedTimeline === tl ? '#27c93f' : 'rgba(255, 255, 255, 0.1)'}`,
-                      color: '#ffffff',
-                      cursor: 'pointer',
-                      transition: 'all 0.15s',
-                    }}
-                  >
-                    {tl}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Notes */}
+            {/* Detalle o notas opcionales */}
             <div style={{ marginBottom: '24px' }}>
-              <label style={{ display: 'block', fontSize: '0.84rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '8px' }}>
-                Notas adicionales (opcional):
+              <label
+                style={{
+                  display: 'block',
+                  fontSize: '0.86rem',
+                  fontWeight: 600,
+                  color: '#cbd5e1',
+                  marginBottom: '10px',
+                }}
+              >
+                2. Cuéntanos brevemente sobre tu proyecto (opcional):
               </label>
+
               <textarea
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-                placeholder="Cuéntanos brevemente sobre las funcionalidades clave que requieres..."
+                value={details}
+                onChange={(e) => setDetails(e.target.value)}
+                placeholder="Ejemplo: Necesitamos controlar las ventas diarias y el stock de 2 sucursales con 3 usuarios..."
                 rows={3}
                 style={{
                   width: '100%',
-                  padding: '12px',
-                  borderRadius: '6px',
-                  background: 'rgba(0, 0, 0, 0.3)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  padding: '12px 14px',
+                  borderRadius: '8px',
+                  background: 'rgba(0, 0, 0, 0.25)',
+                  border: '1px solid rgba(255, 255, 255, 0.12)',
                   color: '#ffffff',
                   fontSize: '0.9rem',
                   outline: 'none',
                   resize: 'none',
-                  fontFamily: 'var(--font-sans)',
+                  lineHeight: 1.5,
+                  fontFamily: 'inherit',
+                  transition: 'border-color 0.2s',
                 }}
+                onFocus={(e) => (e.target.style.borderColor = 'var(--brand-red)')}
+                onBlur={(e) => (e.target.style.borderColor = 'rgba(255, 255, 255, 0.12)')}
               />
             </div>
 
+            {/* Botón directo a WhatsApp de Ishmael */}
             <a
-              href={createWhatsAppUrl('59160851148')}
+              href={buildWhatsAppUrl('59160851148')}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary"
-              style={{ width: '100%', justifyContent: 'center', padding: '14px 20px', fontSize: '1rem' }}
+              style={{
+                width: '100%',
+                justifyContent: 'center',
+                padding: '14px 20px',
+                fontSize: '0.95rem',
+                gap: '10px',
+                borderRadius: '8px',
+              }}
             >
               <MessageSquare size={18} />
-              <span>Enviar Requerimientos por WhatsApp</span>
+              <span>Enviar Consulta a Ishmael por WhatsApp</span>
               <ArrowRight size={18} />
             </a>
           </div>
 
-          {/* Right: Direct Contacts */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            <div className="app-window" style={{ padding: '24px', background: '#0e131d' }}>
+          {/* Columna Derecha: Canales directos de contacto */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
+            {/* Tarjeta Ishmael Belfort (WhatsApp 608) */}
+            <div
+              style={{
+                background: '#0d121c',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+                borderRadius: '14px',
+                padding: '24px 26px',
+              }}
+            >
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
-                <div style={{
-                  width: '46px',
-                  height: '46px',
-                  borderRadius: '8px',
-                  background: 'rgba(230, 0, 40, 0.12)',
-                  border: '1px solid var(--brand-red)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0,
-                }}>
-                  <Phone size={20} color="var(--brand-red)" />
+                <div
+                  style={{
+                    width: '44px',
+                    height: '44px',
+                    borderRadius: '50%',
+                    border: '1px solid var(--brand-red)',
+                    background: 'rgba(230, 0, 40, 0.08)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'var(--brand-red)',
+                    flexShrink: 0,
+                  }}
+                >
+                  <Phone size={18} />
                 </div>
+
                 <div>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 600 }}>
-                    ATENCIÓN DIRECTA / WHATSAPP
+                  <div style={{ fontSize: '0.78rem', color: 'var(--brand-red)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                    Atención &amp; Cotizaciones
                   </div>
-                  <div style={{ fontSize: '1.15rem', fontWeight: 700, color: '#ffffff', margin: '4px 0' }}>
-                    Erick Belfort
+                  <div style={{ fontSize: '1.2rem', fontWeight: 800, color: '#ffffff', margin: '3px 0 8px' }}>
+                    Ishmael Belfort
                   </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '0.95rem' }}>
-                    <a href="https://wa.me/59160851148" target="_blank" rel="noopener noreferrer" style={{ color: '#00d2ff' }}>
-                      +591 608-51148
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <a
+                      href="https://wa.me/59160851148"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        color: '#ffffff',
+                        fontSize: '0.95rem',
+                        fontWeight: 600,
+                        textDecoration: 'none',
+                      }}
+                      onMouseOver={(e) => (e.currentTarget.style.color = 'var(--brand-red)')}
+                      onMouseOut={(e) => (e.currentTarget.style.color = '#ffffff')}
+                    >
+                      <span>+591 608-51148 (WhatsApp directo)</span>
                     </a>
-                    <a href="https://wa.me/59177390707" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-secondary)' }}>
-                      +591 773-90707
+
+                    <a
+                      href="https://wa.me/59177390707"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        color: 'var(--text-secondary)',
+                        fontSize: '0.9rem',
+                        textDecoration: 'none',
+                      }}
+                      onMouseOver={(e) => (e.currentTarget.style.color = '#ffffff')}
+                      onMouseOut={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
+                    >
+                      <span>+591 773-90707 (Línea de soporte)</span>
                     </a>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="app-window" style={{ padding: '24px', background: '#0e131d' }}>
+            {/* Tarjeta Correo Electrónico */}
+            <div
+              style={{
+                background: '#0d121c',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+                borderRadius: '14px',
+                padding: '24px 26px',
+              }}
+            >
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
-                <div style={{
-                  width: '46px',
-                  height: '46px',
-                  borderRadius: '8px',
-                  background: 'rgba(0, 210, 255, 0.12)',
-                  border: '1px solid #00d2ff',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0,
-                }}>
-                  <Mail size={20} color="#00d2ff" />
+                <div
+                  style={{
+                    width: '44px',
+                    height: '44px',
+                    borderRadius: '50%',
+                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                    background: 'rgba(255, 255, 255, 0.03)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#ffffff',
+                    flexShrink: 0,
+                  }}
+                >
+                  <Mail size={18} />
                 </div>
+
                 <div>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 600 }}>
-                    CORREO ELECTRÓNICO
+                  <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                    Correo Electrónico
                   </div>
-                  <div style={{ fontSize: '1.15rem', fontWeight: 700, color: '#ffffff', margin: '4px 0' }}>
-                    Consultas &amp; Propuestas
+                  <div style={{ fontSize: '1.05rem', fontWeight: 700, color: '#ffffff', margin: '3px 0 6px' }}>
+                    Consultas &amp; Propuestas Formales
                   </div>
-                  <a href="mailto:erickbelfort@hotmail.es" style={{ color: '#00d2ff', fontSize: '0.95rem' }}>
+                  <a
+                    href="mailto:erickbelfort@hotmail.es"
+                    style={{
+                      color: 'var(--text-secondary)',
+                      fontSize: '0.92rem',
+                      textDecoration: 'none',
+                      transition: 'color 0.2s',
+                    }}
+                    onMouseOver={(e) => (e.currentTarget.style.color = 'var(--brand-red)')}
+                    onMouseOut={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
+                  >
                     erickbelfort@hotmail.es
                   </a>
                 </div>
               </div>
             </div>
 
-            <div className="app-window" style={{ padding: '24px', background: '#0e131d' }}>
+            {/* Tarjeta Ubicación */}
+            <div
+              style={{
+                background: '#0d121c',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+                borderRadius: '14px',
+                padding: '24px 26px',
+              }}
+            >
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
-                <div style={{
-                  width: '46px',
-                  height: '46px',
-                  borderRadius: '8px',
-                  background: 'rgba(39, 201, 63, 0.12)',
-                  border: '1px solid #27c93f',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0,
-                }}>
-                  <MapPin size={20} color="#27c93f" />
+                <div
+                  style={{
+                    width: '44px',
+                    height: '44px',
+                    borderRadius: '50%',
+                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                    background: 'rgba(255, 255, 255, 0.03)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#ffffff',
+                    flexShrink: 0,
+                  }}
+                >
+                  <MapPin size={18} />
                 </div>
+
                 <div>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 600 }}>
-                    UBICACIÓN
+                  <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                    Ubicación
                   </div>
-                  <div style={{ fontSize: '1.15rem', fontWeight: 700, color: '#ffffff', margin: '4px 0' }}>
+                  <div style={{ fontSize: '1.05rem', fontWeight: 700, color: '#ffffff', margin: '3px 0 4px' }}>
                     Santa Cruz de la Sierra, Bolivia
                   </div>
-                  <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+                  <div style={{ fontSize: '0.86rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
                     Desarrollo de proyectos con alcance local, nacional e internacional.
                   </div>
                 </div>

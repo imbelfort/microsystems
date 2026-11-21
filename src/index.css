@@ -156,6 +156,34 @@ ul {
   transform: translateY(-2px);
 }
 
+/* Animations for Interactive Production Cards and Plans */
+@keyframes eqPulse1 { 0%, 100% { height: 25%; } 50% { height: 90%; } }
+@keyframes eqPulse2 { 0%, 100% { height: 70%; } 50% { height: 30%; } }
+@keyframes eqPulse3 { 0%, 100% { height: 40%; } 50% { height: 100%; } }
+@keyframes eqPulse4 { 0%, 100% { height: 85%; } 50% { height: 45%; } }
+@keyframes eqPulse5 { 0%, 100% { height: 30%; } 50% { height: 75%; } }
+@keyframes eqPulse6 { 0%, 100% { height: 95%; } 50% { height: 35%; } }
+
+@keyframes livePulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.35); opacity: 0.4; }
+}
+
+@keyframes scanbeam {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 0.5; }
+  100% { transform: translateY(200%); opacity: 0; }
+}
+
+@keyframes dashFlow {
+  to { stroke-dashoffset: -24; }
+}
+
+@keyframes cardGlowShift {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
 /* App Mockup Windows */
 .app-window {
   background: var(--surface-color);
